@@ -1,7 +1,6 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-10">
 <title>Control Valve CV Calculator (MKS Units) - IEC 60534 / ISA 75.01</title>
 <style>
   :root{
