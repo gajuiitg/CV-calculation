@@ -1,28 +1,28 @@
 <html lang="en">
 <head>
-<meta charset="UTF-10">
+<meta charset="UTF-16">
 <title>Control Valve CV Calculator (MKS Units) - IEC 60534 / ISA 75.01</title>
 <style>
   :root{
     --navy:#1b3a5c; --steel:#2f6690; --lt:#eef3f7; --line:#c8d6e0; --ok:#1e7d34; --warn:#b34700; --bad:#a4161a;
   }
   *{box-sizing:border-box;}
-  body{font-family:Arial, "Segoe UI", sans-serif; margin:0; background:#f4f7f9; color:#1a2733;}
+  body{font-family:Arial, "Segoe UI", sans-serif; margin:0; background:#f4f7f9; color:#1a2733; overflow-x:hidden;}
   header{background:var(--navy); color:#fff; padding:10px 16px;}
   header h1{margin:0; font-size:18px;}
-  header p{margin:2px 0 0; font-size:11px; color:#cfe0ee;}
+  header p{margin:2px 0 0; font-size:11px; color:#cfe0ee; line-height:1.4;}
   .tabs{display:flex; background:var(--steel); flex-wrap:wrap;}
   .tabs button{flex:1; min-width:140px; padding:10px 6px; background:var(--steel); color:#fff; border:none; border-right:1px solid #245577; cursor:pointer; font-size:13px; font-weight:bold;}
   .tabs button.active{background:var(--lt); color:var(--navy);}
-  .wrap{max-width:1000px; margin:0 auto; padding:14px;}
+  .wrap{max-width:1000px; width:min(100%, 1000px); margin:0 auto; padding:14px;}
   .tabpanel{display:none;}
   .tabpanel.active{display:block;}
   .card{background:#fff; border:1px solid var(--line); border-radius:6px; padding:12px 14px; margin-bottom:12px;}
   .card h2{font-size:14px; margin:0 0 8px; color:var(--navy); border-bottom:2px solid var(--lt); padding-bottom:4px;}
   .grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-  .row{display:flex; align-items:center; gap:8px; margin-bottom:7px; font-size:12.5px;}
-  .row label{flex:0 0 190px;}
-  .row input, .row select{flex:1; padding:4px 6px; font-size:12.5px; border:1px solid #9fb4c2; border-radius:3px;}
+  .row{display:flex; align-items:center; gap:8px; margin-bottom:7px; font-size:12.5px; flex-wrap:wrap;}
+  .row label{flex:0 0 190px; max-width:100%;}
+  .row input, .row select{flex:1; min-width:0; padding:4px 6px; font-size:12.5px; border:1px solid #9fb4c2; border-radius:3px;}
   .unit{flex:0 0 55px; color:#5a6b78; font-size:11.5px;}
   .btnbar{margin:10px 0; display:flex; gap:8px; flex-wrap:wrap;}
   button.act{background:var(--navy); color:#fff; border:none; padding:8px 16px; border-radius:4px; cursor:pointer; font-size:13px;}
@@ -40,11 +40,24 @@
   table.curve{width:100%; border-collapse:collapse; font-size:11.5px; margin-top:8px;}
   table.curve th, table.curve td{border:1px solid var(--line); padding:3px 6px; text-align:center;}
   table.curve th{background:var(--lt);}
-  canvas{border:1px solid var(--line); background:#fff; max-width:100%;}
+  canvas{border:1px solid var(--line); background:#fff; display:block; width:100%; max-width:100%; height:auto;}
   .charwrap{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;}
   .charwrap button{flex:1; min-width:110px; padding:6px; font-size:11.5px; border:1px solid var(--line); background:#fff; cursor:pointer; border-radius:4px;}
   .charwrap button.sel{background:var(--navy); color:#fff;}
   select#presetSel, select#presetSelR{width:100%;}
+
+  @media (max-width: 760px){
+    .wrap{padding:10px 8px;}
+    .grid{grid-template-columns:1fr; gap:10px;}
+    .row{align-items:stretch;}
+    .row label{flex-basis:100%; margin-bottom:2px;}
+    .row input, .row select{width:100%; flex:1 1 100%;}
+    .unit{flex-basis: auto;}
+    .tabs button{min-width:120px;}
+    .charwrap button{min-width:90px;}
+    .result-table{display:block; overflow-x:auto;}
+    table.curve{display:block; overflow-x:auto;}
+  }
 
   @media print{
     header, .tabs, .no-print{display:none !important;}
